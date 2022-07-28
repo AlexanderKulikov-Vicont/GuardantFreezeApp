@@ -167,7 +167,7 @@ namespace GuardantFreezeApp
         /// </summary>
         private void GuardantTestFunction()
         {
-            Console.WriteLine("GuardantTestFunction");
+            //Console.WriteLine("GuardantTestFunction");
             int i = 0;
             i++;
             return;
