@@ -12,13 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DevExpress.Xpf.Core;
 
 namespace GuardantFreezeApp
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : ThemedWindow
     {
         private System.Windows.Threading.DispatcherTimer dispatcherTimer;
         private Random rnd = new Random();
