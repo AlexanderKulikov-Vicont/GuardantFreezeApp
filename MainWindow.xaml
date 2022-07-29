@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GuardantFreezeApp"
         mc:Ignorable="d"
-        Title="GuardantFreezeApp (Dispatcher Key Check)"
+        Title="GuardantFreezeApp (Dispatcher Key Check WITHOUT BINDING)"
         Height="200"
         Width="550"
         DataContext="{StaticResource ViewModel}">
@@ -22,7 +22,7 @@
     <StackPanel Orientation="Vertical">
 
         <StackPanel>
-            <Button Command="{Binding StartCommand}" IsEnabled="{Binding StartButtonEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+            <Button x:Name="StartButton" Click="StartButton_Click" IsEnabled="{Binding StartButtonEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                 <TextBlock Text="START"></TextBlock>
             </Button>
         </StackPanel>
@@ -32,11 +32,11 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Start Time: " Margin="2,0,5,0"></TextBlock>
-                <TextBlock Text="{Binding StartTimeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock Text="" x:Name="StartTimeTextBlock"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Current Time: " Margin="2,0,5,0"></TextBlock>
-                <TextBlock Text="{Binding CurrentTimeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock Text="" x:Name="CurrentTimeTextBlock"></TextBlock>
             </StackPanel>
         </StackPanel>
 
