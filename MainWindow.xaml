@@ -1,12 +1,11 @@
-﻿<dx:ThemedWindow x:Class="GuardantFreezeApp.MainWindow"
+﻿<Window x:Class="GuardantFreezeApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GuardantFreezeApp"
         mc:Ignorable="d"
-        Title="GuardantFreezeApp (Dispatcher Key Check WITHOUT BINDING)"
+        Title="GuardantFreezeApp with Embedded Resource (Dispatcher Key Check)"
         Height="200"
         Width="550"
         DataContext="{StaticResource ViewModel}">
@@ -19,25 +18,25 @@
         <BitmapImage x:Key="databaseError" UriSource="pack://application:,,,/Resources/databaseError.png" />
         <BitmapImage x:Key="databaseOff" UriSource="pack://application:,,,/Resources/databaseOff.png" />
     </Window.Resources>
-
+    
     <StackPanel Orientation="Vertical">
 
         <StackPanel>
-            <Button x:Name="StartButton" Click="StartButton_Click" IsEnabled="{Binding StartButtonEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+            <Button Command="{Binding StartCommand}" IsEnabled="{Binding StartButtonEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                 <TextBlock Text="START"></TextBlock>
             </Button>
         </StackPanel>
 
         <Separator Margin="3"/>
-
+        
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Start Time: " Margin="2,0,5,0"></TextBlock>
-                <TextBlock Text="" x:Name="StartTimeTextBlock"></TextBlock>
+                <TextBlock Text="{Binding StartTimeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Current Time: " Margin="2,0,5,0"></TextBlock>
-                <TextBlock Text="" x:Name="CurrentTimeTextBlock"></TextBlock>
+                <TextBlock Text="{Binding CurrentTimeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </StackPanel>
         </StackPanel>
 
@@ -85,4 +84,4 @@
         </StackPanel>
 
     </StackPanel>
-</dx:ThemedWindow>
+</Window>

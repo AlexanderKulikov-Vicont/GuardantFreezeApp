@@ -10,6 +10,9 @@ namespace GuardantFreezeApp
 {
     public class ViewModel : INotifyPropertyChanged
     {
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer;
+        private Random rnd = new Random();
+
         public event PropertyChangedEventHandler PropertyChanged;
         // Служебная функция (синхронизирует интерфейс с коллекциями)
         protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
@@ -103,10 +106,71 @@ namespace GuardantFreezeApp
         }
         #endregion
 
+        private void SetState1(int state)
+        {
+            if (state == 0) { State1_Ok = false; State1_Off = true; State1_Error = false; }
+            else if (state == 1) { State1_Ok = true; State1_Off = false; State1_Error = false; }
+            else if (state == 2) { State1_Ok = false; State1_Off = false; State1_Error = true; }
+        }
+
+        private void SetState2(int state)
+        {
+            if (state == 0) { State2_Ok = false; State2_Off = true; State2_Error = false; }
+            else if (state == 1) { State2_Ok = true; State2_Off = false; State2_Error = false; }
+            else if (state == 2) { State2_Ok = false; State2_Off = false; State2_Error = true; }
+        }
+
+        private void SetStateDB(int state)
+        {
+            if (state == 0) { Db_Ok = false; Db_Off = true; Db_Error = false; }
+            else if (state == 1) { Db_Ok = true; Db_Off = false; Db_Error = false; }
+            else if (state == 2) { Db_Ok = false; Db_Off = false; Db_Error = true; }
+        }
+
         public ViewModel()
         {
+            SetState1(0);
+            SetState2(0);
+            SetStateDB(0);
             StartButtonEnabled = true;
         }
 
+        private RelayCommand startCommand;
+        public RelayCommand StartCommand
+        {
+            get
+            {
+                return startCommand ??
+                  (startCommand = new RelayCommand(obj =>
+                  {
+                      StartButtonEnabled = false;
+                      dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                      dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+                      dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+                      dispatcherTimer.Start();
+                      StartTimeString = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff");
+                  }));
+            }
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            GuardantTestFunction();
+            SetState1(rnd.Next(0, 3));
+            SetState2(rnd.Next(0, 3));
+            SetStateDB(rnd.Next(0, 3));
+            CurrentTimeString = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff");
+        }
+
+        /// <summary>
+        /// Если защитить данную функцию через Guardant Profiler, то приложение рано или поздно зависнет
+        /// </summary>
+        private void GuardantTestFunction()
+        {
+            //Console.WriteLine("GuardantTestFunction");
+            int i = 0;
+            i++;
+            return;
+        }
     }
 }
