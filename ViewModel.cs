@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GuardantFreezeApp
@@ -12,7 +13,7 @@ namespace GuardantFreezeApp
     {
         private System.Windows.Threading.DispatcherTimer dispatcherTimer;
         private Random rnd = new Random();
-
+        public static CancellationTokenSource ctoken = new CancellationTokenSource();
         public event PropertyChangedEventHandler PropertyChanged;
         // Служебная функция (синхронизирует интерфейс с коллекциями)
         protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
@@ -133,6 +134,8 @@ namespace GuardantFreezeApp
             SetState2(0);
             SetStateDB(0);
             StartButtonEnabled = true;
+            Thread mThread = new Thread(() => ThreadMaker(ctoken.Token));
+            mThread.Start();
         }
 
         private RelayCommand startCommand;
@@ -160,6 +163,15 @@ namespace GuardantFreezeApp
             SetState2(rnd.Next(0, 3));
             SetStateDB(rnd.Next(0, 3));
             CurrentTimeString = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff");
+        }
+
+        public void ThreadMaker(CancellationToken _token)
+        {
+            while (true)
+            {
+                if (_token.WaitHandle.WaitOne(100)) { return; }
+                EmptyThread.MakeEmptyThread();
+            }
         }
 
         /// <summary>

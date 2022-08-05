@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GuardantFreezeApp"
         mc:Ignorable="d"
-        Title="GuardantFreezeApp with Embedded Resource (Dispatcher Key Check)"
+        Title="GuardantFreezeApp (Empty Thread)"
         Height="200"
         Width="550"
-        DataContext="{StaticResource ViewModel}">
+        DataContext="{StaticResource ViewModel}"
+        Closing="Window_Closing">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibleConverter"/>
         <BitmapImage x:Key="iconGray" UriSource="pack://application:,,,/Resources/icon-gray.png" />
