@@ -55,7 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="EmptyThread.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -107,5 +106,48 @@
     <Resource Include="Resources\databaseOff.png" />
     <Resource Include="Resources\databaseSuccess.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OPCLibs\BouncyCastle.Crypto.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Connections.Abstractions.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Hosting.Abstractions.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Hosting.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Http.Abstractions.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Http.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Http.Extensions.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Http.Features.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Server.Kestrel.Core.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Server.Kestrel.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Server.Kestrel.Https.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.AspNetCore.WebUtilities.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.Configuration.Abstractions.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.Configuration.Binder.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.Configuration.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.Configuration.EnvironmentVariables.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.Configuration.FileExtensions.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.DependencyInjection.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.FileProviders.Abstractions.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.FileProviders.Physical.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.FileSystemGlobbing.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.Hosting.Abstractions.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.Logging.Abstractions.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.Logging.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.ObjectPool.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.Options.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Extensions.Primitives.dll" />
+    <None Include="Resources\OPCLibs\Microsoft.Net.Http.Headers.dll" />
+    <None Include="Resources\OPCLibs\Newtonsoft.Json.dll" />
+    <None Include="Resources\OPCLibs\Opc.Ua.Bindings.Https.dll" />
+    <None Include="Resources\OPCLibs\Opc.Ua.Security.Certificates.dll" />
+    <None Include="Resources\OPCLibs\System.Formats.Asn1.dll" />
+    <None Include="Resources\OPCLibs\System.IO.Pipelines.dll" />
+    <None Include="Resources\OPCLibs\System.Security.Cryptography.Cng.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(ProjectDir)\Resources\OPCLibs\*.dll" "$(TargetDir)";</PostBuildEvent>
+  </PropertyGroup>
 </Project>

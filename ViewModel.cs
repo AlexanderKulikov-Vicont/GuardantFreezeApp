@@ -107,6 +107,21 @@ namespace GuardantFreezeApp
         }
         #endregion
 
+        public string TryCatchString
+        {
+            get
+            {
+                try
+                {
+                    byte[] bts = new byte[4];
+                    rnd.NextBytes(bts);
+                    string retstring = (BitConverter.ToSingle(bts, 0)).ToString("G");
+                    return retstring;
+                }
+                catch (Exception ErrorMessage) { Console.WriteLine(ErrorMessage.Message); return ErrorMessage.Message; }
+            }
+        }
+
         private void SetState1(int state)
         {
             if (state == 0) { State1_Ok = false; State1_Off = true; State1_Error = false; }
@@ -134,8 +149,6 @@ namespace GuardantFreezeApp
             SetState2(0);
             SetStateDB(0);
             StartButtonEnabled = true;
-            Thread mThread = new Thread(() => ThreadMaker(ctoken.Token));
-            mThread.Start();
         }
 
         private RelayCommand startCommand;
@@ -152,6 +165,8 @@ namespace GuardantFreezeApp
                       dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
                       dispatcherTimer.Start();
                       StartTimeString = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff");
+                      Thread fThread = new Thread(() => FloatMaker(ctoken.Token));
+                      fThread.Start();
                   }));
             }
         }
@@ -165,12 +180,12 @@ namespace GuardantFreezeApp
             CurrentTimeString = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff");
         }
 
-        public void ThreadMaker(CancellationToken _token)
+        public void FloatMaker(CancellationToken _token)
         {
             while (true)
             {
-                if (_token.WaitHandle.WaitOne(100)) { return; }
-                EmptyThread.MakeEmptyThread();
+                if (_token.WaitHandle.WaitOne(2)) { return; }
+                NotifyPropertyChanged(nameof(TryCatchString));
             }
         }
 

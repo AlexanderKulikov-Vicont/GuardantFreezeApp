@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GuardantFreezeApp"
         mc:Ignorable="d"
-        Title="GuardantFreezeApp (Empty Thread)"
+        Title="GuardantFreezeApp (Packages)"
         Height="200"
         Width="550"
         DataContext="{StaticResource ViewModel}"
@@ -82,6 +82,9 @@
                 <Image Source="{StaticResource databaseOff}" VerticalAlignment="Center" Margin="0,0,3,0"/>
                 <TextBlock Text="DB - Off" VerticalAlignment="Center" Margin="0"/>
             </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" x:Name="RandomTryCatchFloatPanel">
+            <TextBlock Text="{Binding TryCatchString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         </StackPanel>
 
     </StackPanel>
